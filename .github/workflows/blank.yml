@@ -1,0 +1,46 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+- name: Test packages installation
+  # You may pin to the exact commit or the version.
+  # uses: paologallinaharbur/test-packages-action@02ee8aab203e3434536d11d25b380aaa22440fa5
+  uses: paologallinaharbur/test-packages-action@v1.1.0
+  with:
+    # Tag of the integration to test
+    tag: # default is 0.0.0
+    # Name of the integration to test
+    integration: # default is nri-test
+    # Wether to test upgrade path as well
+    upgrade: # optional, default is true
+    # Script to run after installation is completed. Default will test for existence of the integration binary and -show_version output
+    postInstall: # optional, default is 
+    # Extra check lines to append to the default postInstall script.
+    postInstallExtra: # optional, default is 
+    # Space-separated list of distros to run the test on. Supported values are "ubuntu", "suse" and "centos"
+    distros: # optional, default is 
+    # Folder containing installer packages
+    pkgDir: # optional, default is 
